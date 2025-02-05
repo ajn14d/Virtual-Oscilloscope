@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0j43rp3wqk6m"]
+
+[ext_resource type="Script" path="res://oscilloscope.gd" id="1_vw5j1"]
+[ext_resource type="Texture2D" uid="uid://c14awpqu7ld8h" path="res://DisplayBackground.png" id="2_fb0dd"]
+
+[node name="Oscilloscope" type="Node2D"]
+script = ExtResource("1_vw5j1")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(720, 480)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 78.0
+offset_top = 59.0
+offset_right = 1068.0
+offset_bottom = 540.0
+
+[node name="AmplitudeSlider" type="HSlider" parent="Control"]
+layout_mode = 0
+offset_left = 339.0
+offset_top = 481.0
+offset_right = 479.0
+offset_bottom = 545.0
+max_value = 1.0
+step = 0.1
+value = 0.5
+
+[node name="FrequencySlider" type="HSlider" parent="Control"]
+layout_mode = 0
+offset_left = 551.0
+offset_top = 479.0
+offset_right = 691.0
+offset_bottom = 543.0
+min_value = 20.0
+max_value = 2000.0
+step = 10.0
+value = 440.0
+
+[node name="WaveDensitySlider" type="HSlider" parent="Control"]
+layout_mode = 0
+offset_left = 903.0
+offset_top = 478.0
+offset_right = 1043.0
+offset_bottom = 542.0
+min_value = 0.1
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="DisplayBackground" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(580.5, 327)
+scale = Vector2(146.125, 82.75)
+texture = ExtResource("2_fb0dd")
+
+[connection signal="draw" from="Control" to="." method="_on_control_draw"]
+[connection signal="value_changed" from="Control/AmplitudeSlider" to="." method="_on_amplitude_slider_value_changed"]
+[connection signal="value_changed" from="Control/FrequencySlider" to="." method="_on_frequency_slider_value_changed"]
+[connection signal="value_changed" from="Control/WaveDensitySlider" to="." method="_on_wave_density_slider_value_changed"]
